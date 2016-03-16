@@ -1,0 +1,12 @@
+{
+  "name": "wsuwp-plugin-skeleton",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/washingtonstateuniversity/wsuwp-plugin-skeleton"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-phpcs": "^0.4.0"
+  }
+}
