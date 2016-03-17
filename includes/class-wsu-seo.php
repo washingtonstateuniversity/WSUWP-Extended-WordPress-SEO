@@ -28,20 +28,41 @@ class WSUWP_Extend_WP_SEO {
 	 * @since 0.0.1
 	 */
 	public function setup_hooks() {
-		add_action( 'init', array( $this, 'remove_title_filters' ) ); 
+		add_action( 'init', array( $this, 'remove_wpseo_title_filters' ) );
+		add_action( 'admin_menu', array( $this, 'remove_wpseo_titles_page' ), 999 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'wpseo_metabox' ) );
 		add_filter( 'option_wpseo_titles', array( $this, 'wpseo_title_options' ) );
 		add_filter( 'pre_update_option_wpseo_titles', array( $this, 'wpseo_title_options' ) );
-		add_action( 'admin_menu', array( $this, 'remove_wpseo_titles_page' ), 999 );
 		add_filter( 'wpseo_opengraph_title', array( $this, 'meta_titles_filter' ) );
 		add_filter( 'wpseo_twitter_title', array( $this, 'meta_titles_filter' ) );
 		add_filter( 'pre_get_document_title', array( $this, 'meta_titles_filter' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'wpseo_metabox' ) );
 		add_filter( 'spine_get_title', array( $this, 'spine_get_title_filter' ), 10, 4 );
 	}
 
-	public function remove_title_filters() {
+	/**
+	 * Remove title filters.
+	 */
+	public function remove_wpseo_title_filters() {
 		remove_filter( 'pre_get_document_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
 		remove_filter( 'wp_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
+	}
+
+	/**
+	 * Remove `Titles & Metas` from the menu.
+	 */
+	public function remove_wpseo_titles_page() {
+		$page = remove_submenu_page( 'wpseo_dashboard', 'wpseo_titles' );
+	}
+
+	/**
+	 * Enqueue script for modifying the SEO metabox for post types.
+	 */
+	function wpseo_metabox( $hook ) {
+		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ) ) ) {
+			return;
+		}
+
+		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array('jquery'), '0.1', true );
 	}
 
 	/**
@@ -73,13 +94,6 @@ class WSUWP_Extend_WP_SEO {
 	}
 
 	/**
-	 * Remove the 'Titles & Metas' page.
-	 */
-	public function remove_wpseo_titles_page() {
-		$page = remove_submenu_page( 'wpseo_dashboard', 'wpseo_titles' );
-	}
-
-	/**
 	 * Filter OG and Twitter title meta tag values and get_document_title function.
 	 */
 	public function meta_titles_filter() {
@@ -87,18 +101,14 @@ class WSUWP_Extend_WP_SEO {
 	}
 
 	/**
-	 * Enqueue script for modifying the SEO metabox for post types.
-	 */
-	function wpseo_metabox( $hook ) {
-		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ) ) ) {
-			return;
-		}
-
-		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array('jquery'), '0.1', true );
-	}
-
-	/**
 	 * Filter the Spine title function.
+	 *
+	 * @param string $title       Potentially already rendered title.
+	 * @param string $site_part   `get_option( 'blogname' )`.
+	 * @param string $global_part ` | Washington State University`.
+	 * @param string $view_title  `wp_title( '|', false, 'right' )`.
+	 *
+	 * @return string Built title.
 	 */
 	public function spine_get_title_filter( $title, $site_part, $global_part, $view_title ) {
 		if ( is_front_page() ) {
