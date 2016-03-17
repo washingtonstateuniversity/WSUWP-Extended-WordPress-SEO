@@ -23,5 +23,7 @@ add_action( 'plugins_loaded', 'WSUWP_Extend_WP_SEO' );
  * @return \WSUWP_Extend_WP_SEO
  */
 function WSUWP_Extend_WP_SEO() {
-	return WSUWP_Extend_WP_SEO::get_instance();
+	if ( defined( 'WPSEO_VERSION' ) ) {
+		return WSUWP_Extend_WP_SEO::get_instance();
+	}
 }
