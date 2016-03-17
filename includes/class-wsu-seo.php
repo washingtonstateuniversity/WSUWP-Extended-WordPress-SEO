@@ -28,6 +28,7 @@ class WSUWP_Extend_WP_SEO {
 	 * @since 0.0.1
 	 */
 	public function setup_hooks() {
+		add_action( 'init', array( $this, 'remove_title_filters' ) ); 
 		add_filter( 'option_wpseo_titles', array( $this, 'wpseo_title_options' ) );
 		add_filter( 'pre_update_option_wpseo_titles', array( $this, 'wpseo_title_options' ) );
 		add_action( 'admin_menu', array( $this, 'remove_wpseo_titles_page' ), 999 );
@@ -35,6 +36,11 @@ class WSUWP_Extend_WP_SEO {
 		add_filter( 'wpseo_twitter_title', array( $this, 'meta_titles_filter' ) );
 		//add_filter( 'pre_get_document_title', array( $this, 'meta_titles_filter' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'wpseo_metabox' ) );
+	}
+
+	public function remove_title_filters() {
+		remove_filter( 'pre_get_document_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
+		remove_filter( 'wp_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
 	}
 
 	/**
