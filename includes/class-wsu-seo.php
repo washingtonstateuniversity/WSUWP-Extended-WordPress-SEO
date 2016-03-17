@@ -36,6 +36,7 @@ class WSUWP_Extend_WP_SEO {
 		add_filter( 'wpseo_twitter_title', array( $this, 'meta_titles_filter' ) );
 		//add_filter( 'pre_get_document_title', array( $this, 'meta_titles_filter' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'wpseo_metabox' ) );
+		add_filter( 'spine_get_title', array( $this, 'spine_get_title_filter' ), 10, 4 );
 	}
 
 	public function remove_title_filters() {
@@ -94,6 +95,18 @@ class WSUWP_Extend_WP_SEO {
 		}
 
 		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array('jquery'), '0.1', true );
+	}
+
+	/**
+	 * Filter the Spine title function.
+	 */
+	public function spine_get_title_filter( $title, $site_part, $global_part, $view_title ) {
+		if ( is_front_page() ) {
+			$title = $site_part . $global_part;
+		} else {
+			$title = $view_title . $site_part . $global_part;
+		}
+		return $title;
 	}
 
 }
