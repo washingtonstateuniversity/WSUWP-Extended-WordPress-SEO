@@ -34,7 +34,7 @@ class WSUWP_Extend_WP_SEO {
 		add_action( 'admin_menu', array( $this, 'remove_wpseo_titles_page' ), 999 );
 		add_filter( 'wpseo_opengraph_title', array( $this, 'meta_titles_filter' ) );
 		add_filter( 'wpseo_twitter_title', array( $this, 'meta_titles_filter' ) );
-		//add_filter( 'pre_get_document_title', array( $this, 'meta_titles_filter' ) );
+		add_filter( 'pre_get_document_title', array( $this, 'meta_titles_filter' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'wpseo_metabox' ) );
 		add_filter( 'spine_get_title', array( $this, 'spine_get_title_filter' ), 10, 4 );
 	}
@@ -80,7 +80,7 @@ class WSUWP_Extend_WP_SEO {
 	}
 
 	/**
-	 * Filter OG and Twitter title meta tag values.
+	 * Filter OG and Twitter title meta tag values and get_document_title function.
 	 */
 	public function meta_titles_filter() {
 		return spine_get_title();
