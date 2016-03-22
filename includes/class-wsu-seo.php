@@ -58,7 +58,7 @@ class WSUWP_Extend_WP_SEO {
 	 * Enqueue script for modifying the SEO metabox for post types.
 	 */
 	function wpseo_metabox( $hook ) {
-		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ) ) ) {
+		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ), true ) ) {
 			return;
 		}
 
