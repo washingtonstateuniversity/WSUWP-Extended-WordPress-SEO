@@ -56,6 +56,8 @@ class WSUWP_Extend_WP_SEO {
 
 	/**
 	 * Enqueue script for modifying the SEO metabox for post types.
+	 *
+	 * @param string @hook The hook representing the admin page being viewed.
 	 */
 	function wpseo_metabox( $hook ) {
 		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ), true ) ) {
