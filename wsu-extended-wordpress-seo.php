@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WSU Extended WordPress SEO
+Plugin Name: WSUWP Extended WordPress SEO
 Version: 0.0.1
 Plugin URI: https://web.wsu.edu/
 Description: Modifies default functionality in WordPress SEO.
