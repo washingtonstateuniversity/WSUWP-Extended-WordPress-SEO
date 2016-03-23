@@ -98,7 +98,11 @@ class WSUWP_Extend_WP_SEO {
 	/**
 	 * Filter OG and Twitter title meta tag values and get_document_title function.
 	 */
-	public function meta_titles_filter() {
+	public function meta_titles_filter( $title ) {
+		if ( ! function_exists( 'spine_get_title' ) ) {
+			return $title;
+		}
+
 		return spine_get_title();
 	}
 
