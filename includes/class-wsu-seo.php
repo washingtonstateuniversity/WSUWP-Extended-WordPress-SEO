@@ -62,7 +62,7 @@ class WSUWP_Extend_WP_SEO {
 			return;
 		}
 
-		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array('jquery'), '0.1', true );
+		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array( 'jquery' ), '0.1', true );
 	}
 
 	/**
@@ -118,5 +118,4 @@ class WSUWP_Extend_WP_SEO {
 		}
 		return $title;
 	}
-
 }
