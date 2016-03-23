@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: WSU Extended Yoast SEO
+Plugin Name: WSU Extended WordPress SEO
 Version: 0.0.1
 Plugin URI: https://web.wsu.edu/
-Description: Modifies default functionality in Yoast SEO.
+Description: Modifies default functionality in WordPress SEO.
 Author: washingtonstateuniversity, philcable
 Author URI: https://web.wsu.edu/
 */
