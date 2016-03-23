@@ -51,7 +51,7 @@ class WSUWP_Extend_WP_SEO {
 	 * Remove `Titles & Metas` from the menu.
 	 */
 	public function remove_wpseo_titles_page() {
-		$page = remove_submenu_page( 'wpseo_dashboard', 'wpseo_titles' );
+		remove_submenu_page( 'wpseo_dashboard', 'wpseo_titles' );
 	}
 
 	/**
