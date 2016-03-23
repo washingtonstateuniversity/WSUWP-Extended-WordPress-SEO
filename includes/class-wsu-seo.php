@@ -51,18 +51,20 @@ class WSUWP_Extend_WP_SEO {
 	 * Remove `Titles & Metas` from the menu.
 	 */
 	public function remove_wpseo_titles_page() {
-		$page = remove_submenu_page( 'wpseo_dashboard', 'wpseo_titles' );
+		remove_submenu_page( 'wpseo_dashboard', 'wpseo_titles' );
 	}
 
 	/**
 	 * Enqueue script for modifying the SEO metabox for post types.
+	 *
+	 * @param string @hook The hook representing the admin page being viewed.
 	 */
 	function wpseo_metabox( $hook ) {
-		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ) ) ) {
+		if ( ! in_array( $hook, array( 'edit.php', 'post.php', 'post-new.php' ), true ) ) {
 			return;
 		}
 
-		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array('jquery'), '0.1', true );
+		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array( 'jquery' ), '0.1', true );
 	}
 
 	/**
@@ -118,5 +120,4 @@ class WSUWP_Extend_WP_SEO {
 		}
 		return $title;
 	}
-
 }

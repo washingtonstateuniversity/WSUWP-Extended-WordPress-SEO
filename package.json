@@ -1,9 +1,9 @@
 {
-  "name": "wsuwp-plugin-skeleton",
+  "name": "wsuwp-extended-wordpress-seo",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/washingtonstateuniversity/wsuwp-plugin-skeleton"
+    "url": "https://github.com/washingtonstateuniversity/wsuwp-extended-wordpress-seo"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
