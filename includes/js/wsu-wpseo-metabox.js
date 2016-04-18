@@ -4,7 +4,6 @@
 
 	$(window).load(function() {
 
-		$( '#yoast_wpseo_title' ).remove();
 		$( '#snippet-editor-title' ).prop({
   			disabled: true,
 			placeholder: 'Please edit the post title.',
