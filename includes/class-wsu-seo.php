@@ -7,6 +7,11 @@ class WSUWP_Extend_WP_SEO {
 	private static $instance;
 
 	/**
+	 * @var string Used when enqueuing scripts and styles.
+	 */
+	var $script_version = '0.0.3';
+
+	/**
 	 * Maintain and return the one instance. Initiate hooks when
 	 * called the first time.
 	 *
@@ -64,7 +69,7 @@ class WSUWP_Extend_WP_SEO {
 			return;
 		}
 
-		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array( 'jquery' ), '0.1', true );
+		wp_enqueue_script( 'spine-wpseo-mb', plugins_url( '/js/wsu-wpseo-metabox.js', __FILE__ ), array( 'jquery' ), $this->script_version, true );
 	}
 
 	/**
