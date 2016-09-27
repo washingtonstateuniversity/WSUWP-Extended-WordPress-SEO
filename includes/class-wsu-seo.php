@@ -48,8 +48,10 @@ class WSUWP_Extend_WP_SEO {
 	 * Remove title filters.
 	 */
 	public function remove_wpseo_title_filters() {
-		remove_filter( 'pre_get_document_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
-		remove_filter( 'wp_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
+		if ( class_exists( 'WPSEO_Frontend' ) ) {
+			remove_filter( 'pre_get_document_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
+			remove_filter( 'wp_title', array( WPSEO_Frontend::get_instance(), 'title' ), 15 );
+		}
 	}
 
 	/**
